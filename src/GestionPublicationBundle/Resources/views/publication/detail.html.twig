@@ -1,0 +1,62 @@
+{% extends "layoutFront.html.twig" %}
+{% form_theme f 'bootstrap_4_layout.html.twig' %}
+{% block title %}Publication{% endblock %}
+
+{% block content %}
+    <!-- Page Content -->
+<div class="container container-fluid">
+
+    <div class="row">
+        <div class="col-lg-8">
+            <h1 class="mt-4 text-primary">Publication</h1>
+            <p class="lead">par
+                <a href="#">{{ publication.utilisateur.getNom() }} {{ publication.utilisateur.getPrenom() }}</a>
+            </p>
+            <hr>
+            <p>Publier le {{ publication.date | date('d/m/y') }}  à {{ publication.date |date('H:i') }}</p>
+            <hr>
+            <div>
+                <img class="img-fluid rounded" src="{{ asset('uploads/photo/' ~ publication.photo) }}" alt="">
+            </div>
+            <hr>
+            <p class="lead">{{publication.contenu }}</p>
+            <hr>
+
+            {% if is_granted("IS_AUTHENTICATED_FULLY") and app.user.hasRole('ROLE_USERT') and app.user == publication.utilisateur %}
+                <a href="{{path('modifie_publication', {'id':publication.id})}}" class="btn btn-warning">Modifier</a>
+                <a href="{{path('supprime_publication', {'id':publication.id})}}" class="btn btn-danger">Supprimer</a>
+            {% endif %}
+
+            <!-- Formulaire de commentaire -->
+
+            <div class="card my-4">
+                <h5 class="card-header">Commenter sur la publication:</h5>
+                <div class="card-body">
+                        {{ form_start(f) }}
+                            {{ form_row(f.contenu) }}
+                            {{ form_row(f.commenter) }}
+                        {{ form_end(f)}}
+
+                </div>
+            </div>
+
+            {% for commentaire in publication.commentaire %}
+            <!-- Single Comment -->
+                <div class="media mb-4">
+                    <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                    <div class="media-body">
+                        <h5 class="mt-0">{{ commentaire.getUtilisateur().getUsername() }}</h5>
+                        <small>{{ commentaire.date | date('d/m/y') }}  à {{ commentaire.date |date('H:i') }}</small>
+                        <div>{{ commentaire.getContenu() }}</div>
+                        <a href="{{ path('delete_comment',{'id': commentaire.id}) }}"><button type="button" class="btn btn-primary">Supprimer</button></a>
+                    </div>
+                </div>
+                <hr>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+        {% endblock %}
+{% block footer %}
+{% endblock %}

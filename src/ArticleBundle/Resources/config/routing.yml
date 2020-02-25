@@ -1,0 +1,36 @@
+article_homepage:
+    path:     /
+    defaults: { _controller: ArticleBundle:Default:index }
+add_article:
+    path: /add
+    defaults: { _controller: ArticleBundle:Article:addArticle }
+add_article_back:
+    path: /addArticleBack
+    defaults: { _controller: ArticleBundle:Article:addArticleBack }
+delete_article:
+    path: /deleteArticle/{id}
+    defaults: { _controller: ArticleBundle:Article:deleteArticle}
+delete_article_back:
+    path: /deleteArticleback/{id}
+    defaults: { _controller: ArticleBundle:Article:deleteArticleback}
+List_Article:
+    path: /ListArticle
+    defaults: { _controller: ArticleBundle\Controller\ArticleController::displayArticleAction }
+add_theme:
+    path: /AddThemeListTheme
+    defaults: { _controller: ArticleBundle\Controller\ThemeController::AddAction }
+List_theme:
+    path: /ListTheme
+    defaults: { _controller: ArticleBundle\Controller\ThemeController::ListThemeAction }
+Delete_theme:
+    path: /DeleteTheme/{id}
+    defaults: { _controller: ArticleBundle\Controller\ThemeController::DeleteThemeAction }
+Modify_theme:
+    path: /ModifyTheme/{id}
+    defaults: { _controller: ArticleBundle\Controller\ThemeController::ModifiyThemeAction }
+Modify_Article_back:
+    path: /ModifyArticleBack/{id}
+    defaults: { _controller: ArticleBundle\Controller\ArticleController::ModifiyArticleBackAction }
+Display_article_front:
+    path: /DisplayArticleFront
+    defaults: { _controller: ArticleBundle:Article:displayArticleFront }

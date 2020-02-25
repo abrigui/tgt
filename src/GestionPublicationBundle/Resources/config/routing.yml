@@ -1,0 +1,98 @@
+#ajouter une publication
+ajout_publication:
+    path:     /ajoutPublication
+    defaults: { _controller: GestionPublicationBundle:Publication:AjoutPublication }
+
+#afficher une publication
+affiche_publication:
+    path:     /affichePublication/{page}
+    defaults: { _controller: GestionPublicationBundle:Publication:AffichePublication }
+
+#afficher les details d'une publication
+affiche_detail_publication:
+    path:     /afficheDetailPublication/{id}
+    defaults: { _controller: GestionPublicationBundle:Publication:AfficheDetailPublication }
+
+#supprimer une publication
+supprime_publication:
+    path:     /supprimePublication/{id}
+    defaults: { _controller: GestionPublicationBundle:Publication:SupprimePublication }
+
+#modifier une publication
+modifie_publication:
+    path:     /modifiePublication/{id}
+    defaults: { _controller: GestionPublicationBundle:Publication:ModifiePublication }
+
+#chercher une publication
+ajax_search:
+    path:     /search
+    defaults: { _controller: GestionPublicationBundle:Publication:search }
+
+#supprimer un commentaire
+delete_comment:
+    path:     /deletecomment/{id}
+    defaults: { _controller: GestionPublicationBundle:Publication:deleteComment }
+
+################################################################################################################################
+
+#afficher page d'accueil
+accueil:
+    path:     /accueil
+    defaults: { _controller: GestionPublicationBundle:Publication:accueil }
+
+#afficher profile utilisateur connecté
+profile:
+    path:     /afficheProfile/{page}
+    defaults: { _controller: GestionPublicationBundle:User:ProfilTalent }
+
+#redirection apres login
+login_redirect:
+    path:     /redirect
+    defaults: { _controller: GestionPublicationBundle:User:loginRedirect }
+
+#afficher la template front back
+frontBack:
+    path:     /frontBack
+    defaults: { _controller: GestionPublicationBundle:User:frontBack }
+
+#afficher liste des talents
+affiche_talent:
+    path:     /afficheTalent
+    defaults: { _controller: GestionPublicationBundle:User:afficheTalent }
+
+#liker une publication
+like:
+    path:     /publication/{id}/like
+    defaults: { _controller: GestionPublicationBundle:Publication:like }
+
+#afficher liste des utilisateurs pour l'administrateur
+dashboard_utilisateur:
+    path:     /utilisateurs
+    defaults: { _controller: GestionPublicationBundle:User:dashboardUtilisateur }
+
+#afficher profil d'un utilisateur talent
+profile_pro:
+    path:     /profilePro
+    defaults: { _controller: GestionPublicationBundle:User:ProfilPro }
+
+#consulter un profil d'un utilisateur talent
+consulterProfile_talent:
+    path:     /ConsulterProfile/{id}
+    defaults: { _controller: GestionPublicationBundle:User:afficheProfile }
+
+#consulter profile utilisateur pro
+consulterProfile_pro:
+    path:     /ConsulterProfilePro/{id}
+    defaults: { _controller: GestionPublicationBundle:User:afficheProfilePro }
+
+#supprimer un utilisateur
+supprimer_utilisateur:
+    path:     /supprimerUtilisateur/{id}
+    defaults: { _controller: GestionPublicationBundle:User:SupprimerUtilisateur }
+
+
+
+#afficher index des message
+accueil_message:
+    path:     /message/{id}
+    defaults: { _controller: GestionPublicationBundle:Messgae:accueil }

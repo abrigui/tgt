@@ -1,0 +1,43 @@
+{% extends 'layoutFront.html.twig' %}
+{% block title %} Profile{% endblock %}
+
+{% block content %}
+
+    {% if is_granted("IS_AUTHENTICATED_FULLY") and app.user.hasRole('ROLE_USERT')%}
+        <a href="{{ path('ajout_publication') }}" class="btn btn-primary m-4">Ajouter publication</a>
+        {% if publication is not empty %}
+            {% for publication in publication %}
+                {% if app.user == publication.utilisateur  %}
+                    <section class="ftco-section">
+                        <div class="container container-fluid">
+                            <div class="row text-center">
+                                    <div class="col-6">
+                                        <div class="blog-entry ">
+                                            <img  class="block-20 d-flex align-items-end" src="{{ asset('uploads/photo/' ~ publication.photo) }}">
+                                            <div class="text border border-top-0 p-4">
+                                                <p>{{publication.contenu | slice(0,100)}}</p>
+                                                <div class="d-flex align-items-center mt-4">
+                                                    <p class="mb-0"><a href="{{path('affiche_detail_publication', {'id':publication.id})}}" class="btn btn-primary">Consulter <span class="ion-ios-arrow-round-forward"></span></a></p>
+                                                    <p class="ml-auto mb-0">
+                                                        <a href="#" class="mr-2">{{ publication.utilisateur.getUsername() }}    </a>
+                                                        <a href="#" class="meta-chat"><span class="icon-chat"></span>{{ publication.commentaire | length }}</a>
+                                                    </p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </section>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <p class="text-center"><strong>Il n'y a aucun article pour l'instant.</strong></p>
+        {% endif %}
+    {% endif %}
+
+    {{ include('@GestionPublication/publication/pagination.html.twig') }}
+
+{% endblock %}
+

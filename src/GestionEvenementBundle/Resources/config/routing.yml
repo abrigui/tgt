@@ -1,0 +1,78 @@
+gestion_evenement_homepage:
+    path:     /
+    defaults: { _controller: GestionEvenementBundle:Default:index }
+
+AjoutCategorie:
+    path:     /ajouterCategorie
+    defaults: { _controller: GestionEvenementBundle:Evenement:AjoutCategorie }
+
+AfficheCategorie:
+    path:     /afficherCategorie
+    defaults: { _controller: GestionEvenementBundle:Evenement:AfficheCategorie }
+
+ModifierCategorie:
+    path:     /modifierCategorie/{id}
+    defaults: { _controller: GestionEvenementBundle:Evenement:UpdateCategorie }
+
+SupprimerCategorie:
+    path:     /supprimerCategorie/{id}
+    defaults: { _controller: GestionEvenementBundle:Evenement:SuppressionCategorie }
+
+AjoutSousCategorie:
+    path:     /ajouterSousCategorie
+    defaults: { _controller: GestionEvenementBundle:Evenement:AjoutSousCategorie }
+
+AfficheSousCategorie:
+    path:     /afficherSousCategorie
+    defaults: { _controller: GestionEvenementBundle:Evenement:AfficheSousCategorie }
+
+ModifierSousCategorie:
+    path:     /modifierSousCategorie/{id}
+    defaults: { _controller: GestionEvenementBundle:Evenement:UpdateSousCategorie }
+
+SupprimerSousCategorie:
+    path:     /supprimerSousCategorie/{id}
+    defaults: { _controller: GestionEvenementBundle:Evenement:SuppressionSousCategorie }
+
+AjoutEvenement:
+    path:     /ajouterEvenement/{idAgence}
+    defaults: { _controller: GestionEvenementBundle:Evenement:AjoutEvenement }
+
+AfficherEvenement:
+    path:     /afficherEvenement
+    defaults: { _controller: GestionEvenementBundle:Evenement:AfficherEvenement }
+
+AfficherEvenementBack:
+    path:     /afficherEvenementBack
+    defaults: { _controller: GestionEvenementBundle:Evenement:AfficherEvenementBack }
+
+AfficherEvenementFront:
+    path:     /afficherEvenementFront
+    defaults: { _controller: GestionEvenementBundle:Evenement:AfficherEvenementFront }
+
+ModifierEvenement:
+    path:     /modifierEvenement/{id}
+    defaults: { _controller: GestionEvenementBundle:Evenement:UpdateEvenement }
+
+SupprimerEvenement:
+    path:     /supprimerEvenement/{id}
+    defaults: { _controller: GestionEvenementBundle:Evenement:SuppressionEvenement }
+
+DetailEvenement:
+    path:     /detailEvenement/{id}
+    defaults: { _controller: GestionEvenementBundle:Evenement:DetailEvenement }
+
+ajax_recherche:
+    path:     /search
+    defaults: { _controller: GestionEvenementBundle:Evenement:search }
+
+sms:
+    path:     /sms
+    defaults: { _controller: GestionEvenementBundle:Evenement:call }
+
+ParticiperEvenement:
+    path:     /Participer/{idEvenement}/{iduser}
+    defaults: { _controller: GestionEvenementBundle:Evenement:participation }
+SupprimerParticipationEvenement:
+    path:     /SupprimerParticipation/{idEvenement}/{iduser}
+    defaults: { _controller: GestionEvenementBundle:Evenement:supprimerParticipation }

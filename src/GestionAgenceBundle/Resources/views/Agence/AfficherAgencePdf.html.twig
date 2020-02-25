@@ -1,0 +1,47 @@
+
+
+
+    <body>
+    <br><br><br><br><br><br>
+
+            <table class="table table-borderless">
+                <thead>
+
+                <thead >
+                <th>Id Agence</th>
+                <th>Nom</th>
+                <th>Matricule Fiscale</th>
+                <th>Adresse</th>
+                <th>Telephone</th>
+                <th>Fax</th>
+                <th>site</th>
+                <th>Email</th>
+
+                </thead>
+                <tr><td></td></tr>
+                <tr><td></td></tr>
+
+
+
+                {% for form in c %}
+                    <tbody>
+
+                    <tr>
+                        <td>{{ form.id }}</td>
+                        <td>{{ form.nom }}</td>
+                        <td>{{ form.matriculeFiscale }}</td>
+                        <td>{{ form.adresse }}</td>
+                        <td>{{ form.telephone }}</td>
+                        <td>{{ form.fax }}</td>
+                        <td>{{ form.site }}</td>
+                        <td>{{ form.email}}</td>
+
+
+                    </tr>
+                    </tbody>
+
+                {% endfor %}
+            </table>
+
+    </body>
+

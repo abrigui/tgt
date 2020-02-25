@@ -1,0 +1,145 @@
+{% extends "layoutFront.html.twig" %}
+    {% block title %}Publication{% endblock %}
+
+{% block content %}
+
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('{{ asset("front/images/bg_1.jpg")}}');">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row no-gutters slider-text align-items-center justify-content-center">
+                <div class="col-md-9 ftco-animate text-center">
+                    <p class="breadcrumbs"><span class="mr-2"><a href="#">Accueil <i class="ion-ios-arrow-forward"></i></a></span> <span>Blog <i class="ion-ios-arrow-forward"></i></span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="container w-25 p-3 ">
+        <div class="sidebar-search">
+            <label>Recherche:</label>
+            <div class="input-group custom-search-form">
+
+                <input type="text" id="search" class="form-control" placeholder="Chercher publication">
+            </div>
+            <!-- /input-group -->
+        </div>
+        <ul class="nav" id="side-menu">
+            <li>
+                <a href="#"><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level" id="entitiesNav">
+                </ul>
+            </li>
+        </ul>
+
+
+    </div>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            var searchRequest = null;
+            $("#search").keyup(function() {
+                var minlength = 1;
+                var that = this;
+                var value = $(this).val();
+                var entitySelector = $("#entitiesNav").html('');
+                if (value.length >= minlength ) {
+                    if (searchRequest != null)
+                        searchRequest.abort();
+                    searchRequest = $.ajax({
+                        type: "GET",
+                        url: "{{ path('ajax_search') }}",
+                        data: {
+                            'q' : value
+                        },
+                        dataType: "text",
+                        success: function(msg){
+                            //we need to check if the value is the same
+                            if (value===$(that).val()) {
+                                var result = JSON.parse(msg);
+                                $.each(result, function(key, arr) {
+                                    $.each(arr, function(id, value) {
+                                        if (key === 'posts') {
+                                            if (id !== 'error') {
+                                                console.log(value[1]);
+                                                var lien=value[0]
+                                                entitySelector.append('<li><a href="http://localhost/tgt/web/app_dev.php/afficheDetailPublication/'+id+'" class="btn btn-info">'+'<b>'+value[1]+'</b>'+'</a></li>');
+                                            } else {
+                                                entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                            }
+                                        }
+                                    });
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+
+
+    <section class="ftco-section">
+        <div class="container container-fluid">
+            <div class="row">
+                {% if publication is not empty %}
+                {% for publication in publication %}
+                <div class="col-6">
+                    <div class="blog-entry ">
+                            <img  class="d-flex align-items-end" src="{{ asset('uploads/photo/' ~ publication.photo) }}">
+
+                        <div class="text border border-top-0 p-4">
+                            <p>{{publication.contenu | slice(0,100)}}</p>
+                            <div class="d-flex align-items-center mt-4">
+                                <p class="mb-0"><a href="{{path('affiche_detail_publication', {'id':publication.id})}}" class="btn btn-primary">Consulter <span class="ion-ios-arrow-round-forward"></span></a></p>
+                                <p class="ml-auto mb-0">
+                                    <a href="#" class="mr-2">{{ publication.utilisateur.getUsername() }}</a>
+                                    <a href="#" class="meta-chat"><span class="icon-chat"></span>{{ publication.commentaire | length }}</a>
+                                    <a href="{{ path('like', {'id': publication.id }) }}" class="btn btn-link js-like">
+                                        {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+                                                <i class="fa fa-thumbs-down"></i>
+                                        {% elseif is_granted("IS_AUTHENTICATED_FULLY") and  publication.isLikedByUser(app.user.id) == false %}
+                                                <i class="fa fa-thumbs-up"></i>
+                                        {% endif %}
+                                            <span class="js-likes">{{publication.likes | length }}</span>
+                                            <span class="js-label">J'aime</span>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                    <p>Il n'y a aucun article pour l'instant.</p>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    {{ include('@GestionPublication/publication/pagination.html.twig') }}
+                    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+                    <script>
+
+                        function onClickBtnLike(event){
+                            event.preventDefault();
+                            const url = this.href;
+                            const spanCount = this.querySelector('span.js-likes');
+                            const icone  = this.querySelector('i');
+                            axios.get(url).then(function (response) {
+                                const likes  = response.data.likes;
+                                spanCount.textContent = likes;
+                                if(icone.classList.contains('thumbs-down')).icone.classList.replace('thumbs-dow', 'thumbs-up');
+                                else icone.classList.replace('thumbs-up', 'thumbs-down');
+                            });
+                        }
+
+                        document.querySelectorAll('a.js-like').forEach(function (link) {
+                            link.addEventListener('click', onClickBtnLike);
+
+                        });
+                    </script>
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends 'layoutFront.html.twig' %}
+{% block content %}
+
+
+    <div class="container w-25 p-3 ">
+
+    <div class="sidebar-search">
+        <label>Recherche:</label>
+        <div class="input-group custom-search-form">
+
+            <input type="text" id="search" class="form-control" placeholder="Search here">
+        </div>
+    </div>
+    <ul class="nav" id="side-menu">
+        <li>
+            <a href="#"> Entities<span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level" id="entitiesNav">
+            </ul>
+        </li>
+    </ul>
+    </div>
+
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            var searchRequest = null;
+            $("#search").keyup(function() {
+                var minlength = 1;
+                var that = this;
+                var value = $(this).val();
+                var entitySelector = $("#entitiesNav").html('');
+                if (value.length >= minlength ) {
+                    if (searchRequest != null)
+                        searchRequest.abort();
+                    searchRequest = $.ajax({
+                        type: "GET",
+                        url: "{{ path('ajax_search') }}",
+                        data: {
+                            'q' : value
+                        },
+                        dataType: "text",
+                        success: function(msg){
+                            //we need to check if the value is the same
+                            if (value===$(that).val()) {
+                                var result = JSON.parse(msg);
+                                $.each(result, function(key, arr) {
+                                    $.each(arr, function(id, value) {
+                                        if (key === 'posts') {
+                                            if (id !== 'error') {
+                                                console.log(value[1]);
+                                                entitySelector.append('<li><b>'+value[1]+'</b><a href="/detailedpost/'+id+'">'+'<img src="/uploads/post/'+value[0]+'" style="width: 50px; height: 50px"/>'+'</a></li>');
+                                            } else {
+                                                entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                            }
+                                        }
+                                    });
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+
+
+    <section class="ftco-section">
+        <center><a href="{{ path('AfficheSponsorPdf') }}"><button class="btn btn-xs" style=""><i class="fa fa-download" aria-hidden="true">Telecharger en version pdf</i></button></a></center>
+        <center><a href="{{ path('AjoutSponsor') }}" ><button class="btn btn-xs" style=""><i class="fa fa-plus" aria-hidden="true">Ajouter Sponsor</i></button></a></center>
+
+
+        <h2 class="text-center">Sponsor</h2>
+        {% for form in sponsor %}
+            <div class="row text-center row d-flex justify-content-center">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="{{ asset('uploads/logo/') ~ form.logo }}">
+
+                        <div class="card-body">
+                            <p class="card-text">Nom: {{ form.nom }}</p>
+                            <p class="card-text">Adresse : {{ form.adresse }}</p>
+                            <p class="card-text">Num Teléphone : {{ form.telephone }}</p>
+                            <p class="card-text">Adresse email : {{ form.email}}</p>
+                        </div>
+                        <div class="card-footer">
+                            {{ facebookButton() }}
+                        </div>
+                        <div class="card-footer">
+                            {{ pinterestButton()}}
+                        </div>
+
+                        <div class="card-footer">
+
+                            <a href="{{ path('UpdateSponsor',{'id':form.id}) }}" class="btn btn-info fa fa-edit">Modifier</a>
+                            <a href="{{ path('DeleteSponsor',{'id':form.id}) }}" class="btn btn-danger fa fa-trash">Supprimer</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        {% endblock %}

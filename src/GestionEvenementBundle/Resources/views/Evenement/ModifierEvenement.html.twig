@@ -1,0 +1,21 @@
+{% extends 'layoutFrontBack.html.twig' %}
+{% block content %}
+    <br>
+    <center><H1>Modification d'Evènement</H1></center>
+    </br></br>
+    <div class="container">
+        {{form_start(f)}}
+        <label>Nom:</label>{{ form_widget(f.nom,{'label':'Nom'}) }}
+        <br><label>Description:</label>{{ form_widget(f.description,{'label':'Description'}) }}
+        <br><label>Image:</label>{{ form_widget(f.image) }}
+        <br><label>Date début:</label>{{ form_widget(f.dateDebut,{'label':'Date Début'}) }}
+        <br><label>Lieu:</label>{{ form_widget(f.lieu,{'label':'Lieu'}) }}
+        <br><label>Date fin:</label>{{ form_widget(f.dateFin,{'label':'Date Fin'}) }}
+        <br><label>Nombre maximal de participant:</label>{{ form_widget(f.nbParticipantMax,{'label':'Nombre maximal de participant'}) }}
+        <br><label>Sous catégorie:</label>{{ form_widget(f.sousCategorie,{'label':'Sous Catégorie'}) }}
+
+        <br>
+        {{ form_widget(f.Ajouter,{'label':'Modifier'}) }}
+        {{form_end(f)}}
+    </div>
+{% endblock %}

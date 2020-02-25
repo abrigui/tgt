@@ -1,0 +1,12 @@
+{% extends 'layoutBack.html.twig' %}
+{% block content %}
+    <center><H1>Modification de Catégorie</H1></center>
+    </br></br>
+    <div class="container">
+    {{form_start(f)}}
+        <label>Libelle:</label>
+        {{ form_widget(f.libelle,{'label':'libelle'}) }}
+        {{ form_widget(f.Ajouter,{'label':'Modifier'}) }}
+    {{form_end(f)}}
+    </div>
+{% endblock %}

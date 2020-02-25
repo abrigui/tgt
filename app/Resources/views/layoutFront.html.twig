@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ asset("front/css/open-iconic-bootstrap.min.css") }}">
+    <link rel="stylesheet" href="{{ asset("front/css/animate.css") }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ asset("front/css/owl.carousel.min.css") }}">
+    <link rel="stylesheet" href="{{ asset("front/css/owl.theme.default.min.css") }}">
+    <link rel="stylesheet" href="{{ asset("front/css/magnific-popup.css") }}">
+
+    <link rel="stylesheet" href="{{ asset("front/css/aos.css") }}">
+
+    <link rel="stylesheet" href="{{ asset("front/css/ionicons.min.css") }}">
+
+    <link rel="stylesheet" href="{{ asset("front/css/flaticon.css") }}">
+    <link rel="stylesheet" href="{{ asset("front/css/icomoon.css") }}">
+    <link rel="stylesheet" href="{{ asset("front/css/style.css") }}">
+</head>
+<body>
+<div class="bg-top navbar-light d-flex flex-column-reverse">
+    <div class="container py-3">
+        <div class="row no-gutters d-flex align-items-center align-items-stretch">
+            <div class="col-md-4 d-flex align-items-center py-4">
+                <a class="navbar-brand" href="#">TGT <span>Platefrom d'événements</span></a>
+            </div>
+            <div class="col-lg-8 d-block">
+                <div class="row d-flex">
+                    <div class="col-md d-flex topper align-items-center align-items-stretch py-md-4">
+                        <div class="icon d-flex justify-content-center align-items-center"><span class="ion-ios-paper-plane"></span></div>
+                        <div class="text">
+                            <span>Email</span>
+                            <span>TGT@gmail.com</span>
+                        </div>
+                    </div>
+                    <div class="col-md d-flex topper align-items-center align-items-stretch py-md-4">
+                        <div class="icon d-flex justify-content-center align-items-center"><span class="ion-ios-call"></span></div>
+                        <div class="text">
+                            <span>Appeler</span>
+                            <span>+216 00 000 000</span>
+                        </div>
+                    </div>
+                    <div class="col-md d-flex topper align-items-center align-items-stretch py-md-4">
+                        <div class="icon d-flex justify-content-center align-items-center"><span class="ion-ios-time"></span></div>
+                        <div class="text">
+                            <span>Heures de travail</span>
+                            <span>Lundi - Samedi 8h - 17h</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container d-flex align-items-center">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="oi oi-menu"></span> Menu
+        </button>
+
+        <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav mr-5">
+                <li class="nav-item active"><a href="{{ path('accueil') }}" class="nav-link">Accueil</a></li>
+                <li class="nav-item"><a href="{{ path('affiche_talent') }}" class="nav-link">Talents</a></li>
+                <li class="nav-item"><a href="{{ path('AfficheAgence') }}" class="nav-link">Agences événementielles</a></li>
+                <li class="nav-item"><a href="{{ path('AfficherEvenementFront') }}" class="nav-link">Evénement</a></li>
+                <li class="nav-item"><a href="{{ path('Display_article_front') }}" class="nav-link">Blog</a></li>
+            </ul>
+        </div>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <a href=" {% if app.user.hasRole('ROLE_USERT') %}{{ path('profile',{'page':'1'}) }}{% else %}{{ path('profile_pro') }}{% endif %}"> <span class="mr-2 d-none d-lg-inline text-black small font-weight-bold"><strong STYLE="color:white">{{ app.user.username }}</strong></span></a>
+            <img class="img-profile rounded-circle" src="{{ asset('uploads/photo/profil.png') }}">
+            </a>
+            <a href="{{ path('fos_user_security_logout') }}" class="btn btn-success mr-4 ml-4 nav-link">Deconnexion</a>
+        {% elseif is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
+        <a href="{{ path('fos_user_security_login') }}" class="btn btn-success mr-4 ml-4 nav-link">Connexion</a>
+            <a href="{{ path('fos_user_registration_register') }}" class="btn btn-success mr-3 ml-3 nav-link">Inscription</a>
+        {% endif %}
+    </div>
+</nav>
+<!-- END nav -->
+{% block content %}
+
+{% endblock %}
+
+{% block footer %}
+<footer class="ftco-footer ftco-bg-dark ftco-section">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-md-6 col-lg-3">
+                <div class="ftco-footer-widget mb-5">
+                    <h2 class="ftco-heading-2">Contactez nous</h2>
+                    <div class="block-23 mb-3">
+                        <ul>
+                            <li><span class="icon icon-map-marker"></span><span class="text">Addresse</span></li>
+                            <li><a href="#"><span class="icon icon-phone"></span><span class="text">+216 00 000 000</span></a></li>
+                            <li><a href="#"><span class="icon icon-envelope"></span><span class="text">TGT@gmail.com</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="ftco-footer-widget mb-5">
+                    <h2 class="ftco-heading-2">Newsletter</h2>
+                    <form action="#" class="subscribe-form">
+                        <div class="form-group">
+                            <input type="text" class="form-control mb-2 text-center" placeholder="Entrer addresse email">
+                            <input type="submit" value="Subscribe" class="form-control submit px-3">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+{% endblock %}
+<!-- loader -->
+
+
+<script src="{{ asset ("front/js/jquery.min.js") }}"></script>
+<script src="{{ asset("front/js/jquery-migrate-3.0.1.min.js") }}"></script>
+<script src="{{ asset("front/js/popper.min.js") }}"></script>
+<script src="{{ asset("front/js/bootstrap.min.js") }}"></script>
+<script src="{{ asset("front/js/jquery.easing.1.3.js") }}"></script>
+<script src="{{ asset("front/js/jquery.waypoints.min.js") }}"></script>
+<script src="{{ asset("front/js/jquery.stellar.min.js") }}"></script>
+<script src="{{ asset("front/js/owl.carousel.min.js") }}"></script>
+<script src="{{ asset("front/js/jquery.magnific-popup.min.js") }}"></script>
+<script src="{{ asset("front/js/aos.js") }}"></script>
+<script src="{{ asset("front/js/jquery.animateNumber.min.js") }}"></script>
+<script src="{{ asset("front/js/scrollax.min.js") }}"></script>
+<script src="{{ asset("front/js/google-map.js") }}"></script>
+<script src="{{ asset("front/js/main.js") }}"></script>
+
+
+</html>

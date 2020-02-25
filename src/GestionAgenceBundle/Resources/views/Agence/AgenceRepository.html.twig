@@ -1,0 +1,13 @@
+
+
+    {% for q in agence %}
+
+            {#% for t in questions.tags %#}
+{{questions.tagName}}
+            {#% endfor %#}
+
+               {{q.titleQuestion}}
+                {{q.createdAt|localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM Y')}}
+                    à
+                    {{q.createdAt|date('H:i')}}
+

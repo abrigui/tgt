@@ -1,0 +1,81 @@
+gestion_agence_homepage:
+    path:     /
+    defaults: { _controller: GestionAgenceBundle:Default:index }
+
+
+
+
+AjoutAgence:
+    path:     /AjoutAgence
+    defaults: { _controller: GestionAgenceBundle:Agence:AjoutAgence }
+
+AfficheAgence:
+    path:     /AfficheAgence
+    defaults: { _controller: GestionAgenceBundle:Agence:AfficheAgence }
+
+AfficheAgenceBack:
+    path:     /AfficheAgenceBack
+    defaults: { _controller: GestionAgenceBundle:Agence:AfficheAgenceBack }
+
+DetailAgence:
+    path:     /detailAgence/{id}
+    defaults: { _controller: GestionAgenceBundle:Agence:DetailAgence }
+
+DetailAgenceBack:
+    path:     /detailAgenceBack/{id}
+    defaults: { _controller: GestionAgenceBundle:Agence:SuppressionAgenceBack }
+
+
+UpdateAgence:
+    path:     /update/{id}
+    defaults: { _controller: GestionAgenceBundle:Agence:ModifAgence }
+
+
+DeleteAgence:
+    path:     /supprimer/{id}
+    defaults: { _controller: GestionAgenceBundle:Agence:SuppressionAgence }
+
+
+AjoutSponsor:
+    path:     /AjoutSponsor
+    defaults: { _controller: GestionAgenceBundle:Sponsor:AjoutSponsor }
+
+
+AfficheSponsor:
+    path:     /AfficheSponsor
+    defaults: { _controller: GestionAgenceBundle:Sponsor:AfficheSponsor }
+
+
+UpdateSponsor:
+    path:     /updateSponsor/{id}
+    defaults: { _controller: GestionAgenceBundle:Sponsor:ModifSponsor }
+
+DeleteSponsor:
+    path:     /supprimerSponsor/{id}
+    defaults: { _controller: GestionAgenceBundle:Sponsor:SuppressionSponsor }
+
+
+
+AfficheAgencePdf:
+    path:     /AfficheAgencePdf
+    defaults: { _controller: GestionAgenceBundle:Agence:AgencePdf }
+
+AfficheSponsorPdf:
+    path:     /AfficheSponsorPdf
+    defaults: { _controller: GestionAgenceBundle:Sponsor:SponsorPdf }
+
+ajax_search:
+    path:     /search
+    defaults: { _controller: GestionAgenceBundle:Sponsor:search }
+
+admin:
+    path:     /admin
+    defaults: { _controller: GestionAgenceBundle:Agence:AfficheDemandeBack }
+
+approuver_demande:
+    path:     /dema/{id}
+    defaults: { _controller: GestionAgenceBundle:DemandeAgence:approuver}
+
+app-ajax:
+    path:     /app-ajax
+    defaults: { _controller: GestionAgenceBundle:Agence:appajx }

@@ -1,0 +1,21 @@
+{% extends 'layoutFront.html.twig' %}
+{% form_theme f 'bootstrap_4_layout.html.twig' %}
+{% block content %}
+<br><br><br>
+<center><h1>Ajouter Sponsor</h1></center>
+    <center>
+        <br>
+        <div>
+            <div class="container">
+                <table class="table table-borderless">
+                    <thead>
+                    </thead>
+                    {{ form(f) }}
+                </table>
+
+            </div>
+        </div>
+
+    </center>
+    <br><br><br><br><br>
+    {% endblock %}

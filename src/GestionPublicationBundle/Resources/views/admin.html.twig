@@ -1,0 +1,144 @@
+{% extends 'layoutBack.html.twig' %}
+
+{% block content %}
+<div class="container content-center">
+    <div class="row">
+        <div class="col-4">
+            <div class="card card-statistic-1">
+                <div class="card-wrap">
+                    <div class="card-header bg-primary" >
+                        <i class="fa fa-user text-white"></i>
+                        <h4 style="color: white">Utilisateurs</h4>
+                    </div>
+                    <div class="card-body">
+                        10
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card card-statistic-1">
+                <div class="card-wrap">
+                    <div class="card-header bg-danger">
+                        <svg class="bi bi-building text-white" width="1em" height="1em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M17.285 2.089a.5.5 0 01.215.411v15a.5.5 0 01-.5.5h-3a.5.5 0 01-.5-.5V16h-1v1.5a.5.5 0 01-.5.5H3a.5.5 0 01-.5-.5v-6a.5.5 0 01.418-.493l5.582-.93V5.5a.5.5 0 01.324-.468l8-3a.5.5 0 01.46.057zM9.5 5.846V10.5a.5.5 0 01-.418.493l-5.582.93V17h8v-1.5a.5.5 0 01.5-.5h2a.5.5 0 01.5.5V17h2V3.221l-7 2.625z" clip-rule="evenodd"></path>
+                            <path fill-rule="evenodd" d="M8.5 17.5v-7h1v7h-1z" clip-rule="evenodd"></path>
+                            <path d="M4.5 13h1v1h-1v-1zm2 0h1v1h-1v-1zm-2 2h1v1h-1v-1zm2 0h1v1h-1v-1zm6-10h1v1h-1V5zm2 0h1v1h-1V5zm-4 2h1v1h-1V7zm2 0h1v1h-1V7zm2 0h1v1h-1V7zm-2 2h1v1h-1V9zm2 0h1v1h-1V9zm-4 0h1v1h-1V9zm0 2h1v1h-1v-1zm2 0h1v1h-1v-1zm2 0h1v1h-1v-1zm-4 2h1v1h-1v-1zm2 0h1v1h-1v-1zm2 0h1v1h-1v-1z"></path>
+                        </svg>
+                        <h4 style="color: white">Agence</h4>
+                    </div>
+                    <div class="card-body">
+                        42
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card card-statistic-1">
+                <div class="card-wrap">
+                    <div class="card-header  bg-warning">
+                        <i class="fa fa-file  text-white"></i>
+                        <h4 style="color: white">Articles</h4>
+                    </div>
+                    <div class="card-body">
+                        1,201
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
+    <script>
+        jQuery(
+            function ()
+            {
+                var boutton = $('.fa-eye');
+                boutton.css('color','black');
+                boutton.on('click',function ()
+                {
+                    var resultat = null;
+                    $(this).css('color','white');
+                    var id = $(this).attr('data');
+                   // alert($(this).attr('data'));
+                    var appetat = $(this).attr('data-etat');
+                    if (appetat == 1)
+                    {
+                        $.ajax(
+                            {
+                                type: "GET",
+                                url: "dema/"+id,
+                                dataType: "text",
+                                success: function (msg) {}
+                            });
+                        $('[data-td="'+id+'"]').text('Non approuver');
+                        $(this).text('approuver');
+                    }
+                    else
+                    {
+                        $.ajax(
+                            {
+                                type: "GET",
+                                url: "dema/"+id,
+                                dataType: "text",
+                                success: function (msg) {}
+                            });
+                        $('[data-td="'+id+'"]').text(' Approuver');
+                        $(this).text('desapprouver');
+                    }
+                });
+            });
+
+    </script>
+
+
+    <div class="ml-3 mr-3 mt-5" style="width: 100%">
+        <div class="card">
+            <div class="card-header">
+                <h4>Liste des demandes </h4>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-striped mb-0">
+                        <thead>
+                        <tr>
+                            <th>Propriétaire</th>
+                            <th>Agence</th>
+                            <th>Matricule Fiscale</th>
+                            <th>Téléphone</th>
+                            <th>Email</th>
+                            <th>Etat</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            {% for form in c %}
+                            <td>{{ form.utilisateurProfessionnel }}</td>
+                            <td>{{ form.nom }}</td>
+                            <td>{{ form.matriculeFiscale }}</td>
+                            <td>{{ form.telephone }}</td>
+                            <td>{{ form.email}}</td>
+                                {% if form.etat == 1 %}
+                            <td data-td="{{ form.id }}" calss="etat">Approuver</td>
+                            <td><a id="app" data-etat="{{ form.etat }}" data="{{ form.id }}"  class="btn btn-info fa fa-eye">desapprouver</a></td>
+                            {% endif %}
+                            {% if form.etat == 0 %}
+                                <td data-td="{{ form.id }}" calss="etat">Non Approuver</td>
+                                <td><a id="app" data-etat="{{ form.etat }}" data="{{ form.id }}" class="btn btn-info fa fa-eye">Approuver</a></td>
+                            {% endif %}
+
+                            {% endfor %}
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

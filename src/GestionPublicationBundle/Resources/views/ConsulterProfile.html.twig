@@ -1,0 +1,57 @@
+{% extends 'layoutFront.html.twig' %}
+{% block title %} Profile{% endblock %}
+
+{% block content %}
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+
+
+    <div class="row py-5 px-4">
+        <div class="col-xl-4 col-md-6 col-sm-10 mx-auto">
+
+            <!-- Profile widget -->
+            <div class="bg-white shadow rounded overflow-hidden">
+                <div class="px-4 pt-0 pb-4 bg-fifth" style="width: 100%">
+                    <div class="media align-items-end profile-header">
+                        <div class="profile mr-3"><img src="https://d19m59y37dris4.cloudfront.net/university/1-1-1/img/teacher-4.jpg" alt="..." width="130" class="rounded mb-2 img-thumbnail">
+                            <a href="#" class="btn btn-primary btn-sm btn-block">Edit profile</a>
+                        </div>
+                        <div class="media-body mb-5 text-white">
+                            <h4 class="mt-0 mb-0">{{ user.username }}</h4>
+                            <p class="small mb-4">{{ user.email }}</p>
+                            <p class="small mb-4">{{ user.telephone }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    {% for publication in publication %}
+        {% if user == publication.utilisateur  %}
+            <section class="ftco-section">
+                <div class="container container-fluid">
+                    <div class="row text-center">
+                        <div class="col-6">
+                            <div class="blog-entry ">
+                                <img  class="block-20 d-flex align-items-end" src="{{ asset('uploads/photo/' ~ publication.photo) }}">
+                                <div class="text border border-top-0 p-4">
+                                    <p>{{publication.contenu | slice(0,100)}}</p>
+                                    <div class="d-flex align-items-center mt-4">
+                                        <p class="mb-0"><a href="{{path('affiche_detail_publication', {'id':publication.id})}}" class="btn btn-primary">Consulter <span class="ion-ios-arrow-round-forward"></span></a></p>
+                                        <p class="ml-auto mb-0">
+                                            <a href="#" class="mr-2">{{ publication.utilisateur.getUsername() }}    </a>
+                                            <a href="#" class="meta-chat"><span class="icon-chat"></span>{{ publication.commentaire | length }}</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

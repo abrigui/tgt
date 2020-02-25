@@ -1,0 +1,33 @@
+
+
+    <section class="ftco-section">
+        <div class="container-fluid" >
+            <div class="row">
+                {% for form in sponsor %}
+                    <div class="col-md-6 col-lg-6">
+                        <div class="blog-entry">
+
+
+                            <img  class="block-20 d-flex align-items-end" src="{{ asset('uploads/logo/') ~ form.logo }}">
+
+
+
+                            <div class="text border border-top-0 p-4">
+
+                                <p> Nom : {{ form.nom }}</p>
+                                <p>Adresse : {{ form.adresse }}</p>
+                                <p>Num Teléphone : {{ form.telephone }}</p>
+                                <p>Adresse email : {{ form.email}}</p>
+                                <div class="d-flex align-items-center mt-4">
+
+
+                                    <p class="ml-auto mb-0">
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>

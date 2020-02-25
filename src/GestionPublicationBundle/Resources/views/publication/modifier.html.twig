@@ -1,0 +1,10 @@
+{% extends 'layoutFront.html.twig' %}
+
+{% form_theme f 'bootstrap_4_layout.html.twig' %}
+
+{% block content %}
+    {{form_start(f)}}
+
+    {{form_end(f)}}
+    {{ form_widget(f.Publier,{'label':'Modifier'}) }}
+{% endblock %}

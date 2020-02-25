@@ -1,0 +1,49 @@
+{% extends 'layoutFront.html.twig' %}
+{% block content %}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <br>
+    <h2 class="text-center"> {{ e.nom }}</h2>
+    <div class="row text-center row d-flex justify-content-center">
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card h-100">
+                <img class="card-img-top" src="{{ asset('uploads/evenement/') ~ e.image }}">
+                <div class="card-body">
+                    <p class="card-text">Description: {{ e.description }}</p>
+                    <p class="card-text">Lieu: {{ e.lieu }}</p>
+                    <p class="card-text">Du: {{ e.dateDebut | date('d/m/y')}} Au: {{ e.dateFin | date('d/m/y') }}</p>
+                    <p class="card-text">Nombre de place: {{ e.nbParticipantMax }}</p>
+                    <p class="card-text">Catégorie: {{ e.sousCategorie }}</p>
+                    <p class="card-text">Organisé par: {{ e.agence }}</p>
+                    <p class="card-text">Nombre de places restantes: {{ e.nbParticipantMax-nbParActuel[1] }}</p>
+                </div>
+                {% if app.user.hasRole('ROLE_USERT') and "now"|date("m/d/Y") > e.dateDebut | date('d/m/y') %}
+                    <div class="card-footer"><a class="btn btn-info text-white">L'Événement a déjà Commencé ! Aucune inscription n'est autoriser </a></div>
+                    {% elseif is_granted('IS_AUTHENTICATED_FULLY') and app.user.hasRole('ROLE_USERT') %}
+                {% if participant == null and nbParActuel[1]!=e.nbParticipantMax %}
+                    <div class="card-footer"><a href="{{ path('ParticiperEvenement', {'idEvenement': e.id, 'iduser': app.user.id}) }}" class="btn btn-success" id="participer">Participer</a></div>
+                    <script >
+                        $('#participer').click(function() {
+                            alert('Votre participation a été enregistrée avec succès.');
+                        });
+                    </script>
+                    {% elseif participant == null and nbParActuel[1]==e.nbParticipantMax %}
+                    <div class="card-footer"><a class="btn btn-warning">Le nombre de participant maximal est atteint</a></div>
+                {% else %}
+                    <div class="card-footer"><a href="{{ path('SupprimerParticipationEvenement', {'idEvenement': e.id, 'iduser': app.user.id}) }}" class="btn btn-danger" id="annuler">Anunuler la participation</a></div>
+                    <script >
+                        $('#annuler').click(function() {
+                            alert('Votre participation a été annulée avec succès.');
+                        });
+                    </script>
+                {% endif %}
+                {% endif %}
+                {% if is_granted("IS_AUTHENTICATED_FULLY") and app.user.hasRole('ROLE_USERP') and app.user == e.agence.utilisateurProfessionnel %}
+                    <div class="card-footer">
+                        <a href="{{ path('ModifierEvenement',{'id':e.id}) }}" class="btn btn-info fa fa-edit">Modifier</a>
+                        <a href="{{ path('SupprimerEvenement',{'id':e.id}) }}" class="btn btn-danger fa fa-trash">supprimer</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

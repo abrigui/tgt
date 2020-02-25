@@ -1,0 +1,100 @@
+{% extends 'layoutFront.html.twig' %}
+{% block content %}
+    <br>
+    {% if is_granted("IS_AUTHENTICATED_FULLY") and app.user.hasRole('ROLE_USERP') and app.user == form.utilisateurProfessionnel %}
+        <a href="{{ path('AjoutEvenement',{'idAgence': form.id}) }}" ><button class="btn btn-xs float-right p-2" style=""><i class=" rounded-pill btn btn-info fa fa-plus" aria-hidden="true">Ajouter évènement</i></button></a>
+    {% endif %}
+    {% if form.sponsor == null and is_granted("IS_AUTHENTICATED_FULLY") and app.user.hasRole('ROLE_USERP') and app.user == form.utilisateurProfessionnel %}
+    <a href="{{ path('AjoutSponsor') }}" ><button class="btn btn-xs float-right p-2" style=""><i class=" rounded-pill btn btn-info fa fa-plus" aria-hidden="true">Ajouter sponsor</i></button></a>
+    {% endif %}
+    <!-- Page Content -->
+
+<div class="row container-fluid float-right m-4">
+
+        <div class="col-4 text-center">
+            <div class="card ml-5 align-content-center">
+                <div class="card-header">Agence:{{ form.nom }}</div>
+                <img class="card-img-top"  style="width: 100%; height: 265px" src="{{ asset('uploads/logo/') ~ form.logo }}">
+
+                <div class="card-body">
+                    <p class="card-text">Matricule Fiscale: {{ form.matriculeFiscale }}</p>
+                    <p class="card-text">Adresse: {{ form.adresse }}</p>
+                    <p class="card-text">Numéro Telephone: {{ form.telephone }}</p>
+                    <p class="card-text">Numéro Fax: {{ form.fax }}</p>
+                    <p class="card-text">Site Web: {{ form.site }}</p>
+                    <p class="card-text">Adresse email: {{ form.email }}</p>
+
+
+                </div>
+                <div class="card-footer">
+                    {% if is_granted("IS_AUTHENTICATED_FULLY") and app.user.hasRole('ROLE_USERP') and app.user == form.utilisateurProfessionnel %}
+                    <a href="{{ path('UpdateAgence',{'id':form.id}) }}" class="btn btn-info fa fa-edit">Modifier</a>
+                    <a href="{{ path('DeleteAgence',{'id':form.id}) }}" class="btn btn-danger fa fa-trash">supprimer</a>
+                    {% endif %}
+                </div>
+                <div class="fill" style="background-image:url('{{asset('uploads/logo/')}}{{form.logo}}')"></div>
+
+            </div>
+        </div>
+
+    {% if form.sponsor !=null %}
+
+        <div class="col-4 text-center ">
+            <div class="card ml-5 align-content-center">
+                <div class="card-header">Sponsor : {{ form.sponsor }}</div>
+                <img class="card-img-top" src="{{ asset('uploads/logo/') ~ form.sponsor.logo }}" style="width: 100%; height: 265px">
+
+                <div class="card-body">
+                    <p class="card-text">Adresse : {{ form.sponsor.adresse }}</p>
+                    <p class="card-text">Numéro Telephone : {{ form.sponsor.telephone }}</p>
+                    <p class="card-text">Adresse email : {{ form.sponsor.email }}</p>
+
+
+                </div>
+                <div class="card-footer">
+                    {{ pinterestButton()}}
+                </div>
+                <div class="card-footer">
+                    {{ facebookButton() }}
+                </div>
+                <div class="card-footer">
+                    {{ twitterButton() }}
+                </div>
+                <div class="card-footer">
+                    {% if is_granted("IS_AUTHENTICATED_FULLY") and app.user.hasRole('ROLE_USERP') and app.user == form.utilisateurProfessionnel %}
+                        <a href="{{ path('UpdateSponsor',{'id':form.sponsor.id}) }}" class="btn btn-info fa fa-edit">Modifier</a>
+                        <a href="{{ path('DeleteSponsor',{'id':form.sponsor.id}) }}" class="btn btn-danger fa fa-trash">supprimer</a>
+                    {% endif %}
+                </div>
+
+
+
+            </div>
+        </div>
+
+    {% endif %}
+</div>
+    {% if event !=null %}
+        <h2 class=" m-5 font-italic">Evènements :</h2>
+        <div class="row align-items-center container-fluid m-2">
+            {% for eve in event%}
+                <div class="col-4 text-center">
+                    <div class="card ml-5 align-content-center">
+                        <img class="card-img-top"  style="width: 100%; height: 300px" src="{{ asset('uploads/evenement/') ~ eve.image }}">
+
+                        <div class="card-body">
+                            <p class="card-text">Nom: {{ eve.nom }}</p>
+                            <p class="card-text">Du: {{ eve.dateDebut | date('d/m/y')}} Au: {{ eve.dateFin | date('d/m/y') }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{{ path('DetailEvenement',{'id':eve.id}) }}" class="btn btn-primary">Afficher detail</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}
+{% block footer %}
+
+{% endblock %}

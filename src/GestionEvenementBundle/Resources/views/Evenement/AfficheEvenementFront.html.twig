@@ -1,0 +1,94 @@
+{% extends 'layoutFront.html.twig' %}
+{% block content %}
+    <div class="container w-25 p-3 position-absolute">
+        {{form_start(f)}}
+        <label>Filtrer: (Sous catégorie)</label>
+        {{ form_widget(f.SousCategorie) }}
+        <br>
+        {{form_end(f)}}
+    </div>
+    <div class="container w-25 p-3 ">
+        <div class="sidebar-search">
+            <label>Recherche:</label>
+            <div class="input-group custom-search-form">
+
+                <input type="text" id="search" class="form-control" placeholder="Chercher publication">
+            </div>
+            <!-- /input-group -->
+        </div>
+        <ul class="nav" id="side-menu">
+            <li>
+                <a href="#"><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level" id="entitiesNav">
+                </ul>
+            </li>
+        </ul>
+
+
+    </div>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            var searchRequest = null;
+            $("#search").keyup(function() {
+                var minlength = 1;
+                var that = this;
+                var value = $(this).val();
+                var entitySelector = $("#entitiesNav").html('');
+                if (value.length >= minlength ) {
+                    if (searchRequest != null)
+                        searchRequest.abort();
+                    searchRequest = $.ajax({
+                        type: "GET",
+                        url: "{{ path('ajax_recherche') }}",
+                        data: {
+                            'q' : value
+                        },
+                        dataType: "text",
+                        success: function(msg){
+                            //we need to check if the value is the same
+                            if (value===$(that).val()) {
+                                var result = JSON.parse(msg);
+                                $.each(result, function(key, arr) {
+                                    $.each(arr, function(id, value) {
+                                        if (key === 'posts') {
+                                            if (id !== 'error') {
+                                                console.log(value[1]);
+                                                var lien=value[0]
+                                                entitySelector.append('<li><a href="http://localhost/tgt/web/app_dev.php/detailEvenement/'+id+'" class="btn btn-info">'+'<b>'+value[1]+'</b>'+'</a></li>');
+                                            } else {
+                                                entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                            }
+                                        }
+                                    });
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+
+    <h2 class="text-center">Evènements</h2>
+    {% for eve in e %}
+    <div class="row text-center row d-flex justify-content-center">
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card h-100">
+                <img class="card-img-top" src="{{ asset('uploads/evenement/') ~ eve.image }}">
+
+                <div class="card-body">
+                    <p class="card-text">Nom: {{ eve.nom }}</p>
+                    <p class="card-text">Du: {{ eve.dateDebut | date('d/m/y')}} Au: {{ eve.dateFin | date('d/m/y') }}</p>
+                </div>
+                <div class="card-footer">
+                    <a href="{{ path('DetailEvenement',{'id':eve.id}) }}" class="btn btn-primary">Afficher detail</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}

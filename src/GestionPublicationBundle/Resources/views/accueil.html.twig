@@ -1,0 +1,50 @@
+{% extends 'layoutFront.html.twig' %}
+{% block content %}
+    <h2 class=" m-5 p-2 font-italic">Evènements :</h2>
+    <div class="row align-items-center container-fluid">
+        {% for eve in e |slice(0, 3)%}
+            <div class="col-4 text-center">
+                <div class="card ml-5 align-content-center">
+                    <img class="card-img-top" style="width: 100%; height: 300px" src="{{ asset('uploads/evenement/') ~ eve.image }}">
+
+                    <div class="card-body">
+                        <p class="card-text">Nom: {{ eve.nom }}</p>
+                        <p class="card-text">Du: {{ eve.dateDebut | date('d/m/y')}} Au: {{ eve.dateFin | date('d/m/y') }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ path('DetailEvenement',{'id':eve.id}) }}" class="btn btn-primary">Afficher detail</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <h2 class="p-2 m-5 font-italic">Articles :</h2>
+    <div class="row align-items-center container-fluid m-4">
+        {% for a in art |slice(0, 3)%}
+            <div class="col-4 text-cente ">
+                <div class="blog-entry">
+                    <a href="#" class="block-20 d-flex align-items-end" style="background-image: url(http://localhost/tgt/web/uploads/article/photo/{{ a.image }});">
+                        <div class="meta-date text-center p-2">
+                            <span class="day">{{ a.date |date('d') }}</span>
+                            <span class="mos">{{ a.date |date('F') }}.</span>
+                            <span class="yr">{{ a.date |date('Y') }}</span>
+                        </div>
+                    </a>
+                    <div class="text border border-top-0 p-4">
+                        <h3 class="heading"><a href="#">{{a.titre}}</a></h3>
+                        <p>{{ a.description }}</p>
+                        <div class="d-flex align-items-center mt-4">
+                            <p class="mb-0"><a href="#" class="btn btn-primary">Read More </a>{% if app.user %} {% if app.user.id == a.user.id %}<a href="{{ path('delete_article', { 'id': a.id }) }}" class="btn btn-primary">Delete </a>{% endif %} {% endif %}</p>
+                            <p class="ml-auto mb-0">
+                                <a href="#" class="mr-2">Admin</a>
+                                {#                                    <a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>#}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+        {% endfor %}
+    </div>
+{% endblock %}

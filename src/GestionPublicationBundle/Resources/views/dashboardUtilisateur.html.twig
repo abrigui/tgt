@@ -1,0 +1,102 @@
+{% extends 'layoutBack.html.twig' %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+    <hr>
+
+    <div class="container">
+        <div class="input-group p-2 col-6">
+            <div class="input-group-prepend">
+                <span class="input-group-text cyan lighten-2" id="basic-text1"><i class="fas fa-search text-white" aria-hidden="true"></i></span>
+            </div>
+            <input class="form-control my-0 py-1" id="myInput" type="text" placeholder="Search.." onkeyup='searchTable()'>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function searchTable() {
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("dataprotable");
+            tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td") ;
+
+
+                for(j=0 ; j<td.length ; j++)
+                {
+                    let tdata = td[j] ;
+                    if (tdata) {
+                        if (tdata.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                            break ;
+                        } else {
+                            tr[i].style.display = "none";
+
+
+
+                        }
+                    }
+                }
+            }
+        }
+
+    </script>
+
+    <div class="container bootstrap snippet">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="main-box no-header clearfix">
+                    <div class="main-box-body clearfix">
+                        <div class="table-responsive">
+                            <table class="table user-list" id="dataprotable">
+                                <thead>
+                                <tr>
+                                    <th><span>Utilisateur</span></th>
+                                    <th><span>addresse</span></th>
+                                    <th class="text-center"><span>Téléphone</span></th>
+                                    <th><span>Email</span></th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for user in user %}
+                                    <tr>
+                                        <td>
+                                            <img src="https://bootdey.com/img/Content/user_1.jpg" alt="">
+                                            <a href="#" class="user-link">{{ user.nom }} {{ user.prenom  }}</a>
+                                        </td>
+                                        <td>{{user.adresse}}</td>
+                                        <td class="text-center">
+                                            <span class="label label-default">{{ user.telephone }}</span>
+                                        </td>
+                                        <td>
+                                            <a href="#">{{ user.email }}</a>
+                                        </td>
+                                        <td style="width: 20%;">
+                                            <a href=" {% if user.hasRole('ROLE_USERT') %}{{ path('consulterProfile_talent',{'id': user.id}) }}{% else %}{{ path('consulterProfile_pro',{'id': user.id}) }}{% endif %}" class="table-link">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                            </a>
+                                            <a href="{{ path('supprimer_utilisateur', {'id' : user.id}) }}" class="table-link danger">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

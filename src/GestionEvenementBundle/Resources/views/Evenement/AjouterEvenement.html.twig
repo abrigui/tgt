@@ -1,0 +1,11 @@
+{% extends 'layoutFrontBack.html.twig' %}
+{% form_theme f 'bootstrap_4_layout.html.twig' %}
+{% block content %}
+    <br>
+    <center><H1>Evènement</H1></center>
+    </br></br>
+<div class="container">
+    {{ form(f) }}
+    {{form_end(f)}}
+</div>
+{% endblock %}

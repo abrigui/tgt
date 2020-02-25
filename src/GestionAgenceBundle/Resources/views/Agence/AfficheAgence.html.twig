@@ -1,0 +1,32 @@
+{% extends 'layoutFront.html.twig' %}
+
+{% block content %}
+
+    <a href="{{ path('AfficheAgencePdf') }}"><button class="btn btn-xs float-right p-2" style=""><i class=" rounded-pill btn btn-info fa fa-download" aria-hidden="true">Telecharger en version pdf</i></button></a>
+    {% if is_granted("IS_AUTHENTICATED_FULLY") and app.user.hasRole('ROLE_USERP')%}
+    <a href="{{ path('AjoutAgence') }}" ><button class="btn btn-xs float-right p-2" style=""><i class=" rounded-pill btn btn-info fa fa-plus" aria-hidden="true">Ajouter</i></button></a>
+    {% endif %}
+
+
+    <h2 class=" m-5 p-2 font-italic">Agence :</h2>
+    <div class="row align-items-center container-fluid p-4">
+        {% for form in c %}
+            {% if form.etat ==1 %}
+            <div class="col-4 text-center p-2">
+                <div class="card ml-5 align-content-center">
+                    <img class="card-img-top" style="width: 100%; height: 300px" src="{{ asset('uploads/logo/') ~ form.logo }}">
+
+                    <div class="card-body">
+                        <p class="card-text">Nom: {{ form.nom }}</p>
+                        <p class="card-text">Telephone: {{ form.telephone }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ path('DetailAgence',{'id':form.id}) }}" class="btn btn-info fa fa-eye">Afficher detail</a>
+                    </div>
+                </div>
+            </div>
+
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

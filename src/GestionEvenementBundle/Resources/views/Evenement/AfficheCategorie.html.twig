@@ -1,0 +1,26 @@
+{% extends 'layoutBack.html.twig' %}
+{% block content %}
+    <center><H1>Les Catégories</H1></center>
+    </br></br>
+<div class="container">
+<table class="table table-striped" size="sm">
+    <thead>
+    <tr>
+        <th scope="col">id</th>
+        <th scope="col">Libelle</th>
+        <th scope="col">Modification</th>
+        <th scope="col">Suppression</th>
+    </tr>
+    </thead>
+    {% for categorie in c %}
+        <tr>
+            <td>{{ categorie.id }}</td>
+            <td>{{ categorie.libelle }}</td>
+            <td><a href="{{ path('ModifierCategorie',{'id':categorie.id}) }}">modifier</a></td>
+            <td><a href="{{ path('SupprimerCategorie',{'id':categorie.id}) }}">supprimer</a></td>
+        </tr>
+    {% endfor %}
+</table>
+    <a href="{{ path('AjoutCategorie') }}" class="btn btn-info" role="button"><i class="fa fa-plus"></i> Ajouter </a>
+</div>
+{% endblock %}

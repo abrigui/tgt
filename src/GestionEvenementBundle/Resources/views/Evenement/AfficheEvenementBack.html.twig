@@ -1,0 +1,45 @@
+{% extends 'layoutBack.html.twig' %}
+{% block content %}
+    <br>
+
+    <center><H1>Les Evènements</H1></center>
+    </br></br>
+        <table class="table table-striped" size="sm">
+            <thead>
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">nom</th>
+                <th scope="col">description</th>
+                <th scope="col">Date début</th>
+                <th scope="col">lieu</th>
+                <th scope="col">Date fin</th>
+                <th scope="col">Nombre maximal de participant</th>
+                <th scope="col">Sous catégorie</th>
+                <th scope="col">Agence</th>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') and app.user.hasRole('ROLE_USERP') %}
+                    <th scope="col">Modification</th>
+                {% endif %}
+                <th scope="col">Suppression</th>
+            </tr>
+            </thead>
+            {% for eve in e %}
+                <tr>
+                    <td>{{ eve.id }}</td>
+                    <td>{{ eve.nom }}</td>
+                    <td>{{ eve.description }}</td>
+                    <td>{{ eve.dateDebut | date }}</td>
+                    <td>{{ eve.lieu }}</td>
+                    <td>{{ eve.dateFin | date }}</td>
+                    <td><center>{{ eve.nbParticipantMax }}</center></td>
+                    <td>{{ eve.sousCategorie }}</td>
+                    <td>{{ eve.agence }}</td>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') and app.user.hasRole('ROLE_USERP') %}
+                        <td><a href="{{ path('ModifierEvenement',{'id':eve.id}) }}">modifier</a></td>
+                    {% endif %}
+                    <td><a href="{{ path('SupprimerEvenement',{'id':eve.id}) }}">supprimer</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+{% endblock %}

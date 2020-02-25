@@ -1,0 +1,131 @@
+{% extends 'layoutFront.html.twig' %}
+
+{% block content %}
+
+
+
+
+    <section class="ftco-section">
+        <div class="container container-fluid">
+            <div class="row justify-content-center mb-5 pb-2">
+                <div class="col-md-8 text-center heading-section ">
+{#                    <span class="subheading">Blog Posts</span>#}
+                    <h2 class="mb-4">Articles</h2>
+                    {% if app.user %}
+                    {% if app.user.hasRole('ROLE_USERP') %}
+                    <a href="{{ path('add_article') }}" class="btn btn-secondary">
+                        <i class="fa fa-undo" aria-hidden="true"></i> Ajouter Article</a>
+                    {% endif %}
+                    {% endif %}
+{#                    <p>Separated they live in. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country</p>#}
+                </div>
+            </div>
+            <div class="row">
+                {% for a in Articles %}
+                <div class="col-md-6 col-lg-4 ">
+                    <div class="blog-entry">
+                        <a href="#" class="block-20 d-flex align-items-end" style="background-image: url(http://localhost/tgt/web/uploads/article/photo/{{ a.image }});">
+                            <div class="meta-date text-center p-2">
+                                <span class="day">{{ a.date |date('d') }}</span>
+                                <span class="mos">{{ a.date |date('F') }}.</span>
+                                <span class="yr">{{ a.date |date('Y') }}</span>
+                            </div>
+                        </a>
+                        <div class="text border border-top-0 p-4">
+                            <h3 class="heading"><a href="#">{{a.titre}}</a></h3>
+                            <p>{{ a.description }}</p>
+                            <div class="d-flex align-items-center mt-4">
+                                <p class="mb-0"><a href="#" class="btn btn-primary">Read More </a>{% if app.user %} {% if app.user.id == a.user.id %}<a href="{{ path('delete_article', { 'id': a.id }) }}" class="btn btn-primary">Delete </a>{% endif %} {% endif %}</p>
+                                <p class="ml-auto mb-0">
+                                    <a href="#" class="mr-2">Admin</a>
+{#                                    <a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>#}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+
+
+
+ {#   <section class="ftco-section">
+        <div class="container">
+            <div class="row no-gutters justify-content-center mb-5">
+                <div class="col-md-6 text-center heading-section ftco-animate">
+
+                    <h2 class="mb-4">Articles</h2>
+#}{#                    <p>Separated they live in. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country</p>#}{#
+                    <p></p>
+                </div>
+            </div>
+            <div class="row">
+                {% for a in Articles %}
+                <div class="col-md-4">
+                    <div class="project">
+                        <div class="img rounded mb-4" style="background-image: url({{ asset("frontnew/images/project-1.jpg") }});" src ="{{ asset("frontnew/images/project-1.jpg") }}"></div>
+                        <div class="text w-100 text-center">
+#}{#                            <span class="cat">Consulting</span>#}{#
+                            <h3><a href="#">{{a.titre}}</a></h3>
+                            <p>{{a.description}}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+#}{#                <div class="col-md-4">#}{#
+#}{#                    <div class="project">#}{#
+#}{#                        <div class="img rounded mb-4" style="background-image: url({{ asset("frontnew/images/project-2.jpg") }});"></div>#}{#
+#}{#                        <div class="text w-100 text-center">#}{#
+#}{#                            <span class="cat">Marketing</span>#}{#
+#}{#                            <h3><a href="#">Consultacy Solutions</a></h3>#}{#
+#}{#                            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country</p>#}{#
+#}{#                        </div>#}{#
+#}{#                    </div>#}{#
+#}{#                </div>#}{#
+#}{#                <div class="col-md-4">#}{#
+#}{#                    <div class="project">#}{#
+#}{#                        <div class="img rounded mb-4" style="background-image: url({{ asset("frontnew/images/project-3.jpg") }});"></div>#}{#
+#}{#                        <div class="text w-100 text-center">#}{#
+#}{#                            <span class="cat">Financing</span>#}{#
+#}{#                            <h3><a href="#">Consultacy Solutions</a></h3>#}{#
+#}{#                            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country</p>#}{#
+#}{#                        </div>#}{#
+#}{#                    </div>#}{#
+#}{#                </div>#}{#
+#}{#                <div class="col-md-4">#}{#
+#}{#                    <div class="project">#}{#
+#}{#                        <div class="img rounded mb-4" style="background-image: url({{ asset("frontnew/images/project-4.jpg") }});"></div>#}{#
+#}{#                        <div class="text w-100 text-center">#}{#
+#}{#                            <span class="cat">Audit &amp; Taxes</span>#}{#
+#}{#                            <h3><a href="#">Consultacy Solutions</a></h3>#}{#
+#}{#                            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country</p>#}{#
+#}{#                        </div>#}{#
+#}{#                    </div>#}{#
+#}{#                </div>#}{#
+#}{#                <div class="col-md-4">#}{#
+#}{#                    <div class="project">#}{#
+#}{#                        <div class="img rounded mb-4" style="background-image: url({{ asset("frontnew/images/project-5.jpg") }});"></div>#}{#
+#}{#                        <div class="text w-100 text-center">#}{#
+#}{#                            <span class="cat">Financing</span>#}{#
+#}{#                            <h3><a href="#">Consultacy Solutions</a></h3>#}{#
+#}{#                            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country</p>#}{#
+#}{#                        </div>#}{#
+#}{#                    </div>#}{#
+#}{#                </div>#}{#
+#}{#                <div class="col-md-4">#}{#
+#}{#                    <div class="project">#}{#
+#}{#                        <div class="img rounded mb-4" style="background-image: url({{ asset("frontnew/images/project-6.jpg") }});"></div>#}{#
+#}{#                        <div class="text w-100 text-center">#}{#
+#}{#                            <span class="cat">Real Estate</span>#}{#
+#}{#                            <h3><a href="#">Consultacy Solutions</a></h3>#}{#
+#}{#                            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country</p>#}{#
+#}{#                        </div>#}{#
+#}{#                    </div>#}{#
+#}{#                </div>#}{#
+            </div>
+        </div>
+    </section>
+#}{% endblock %}
