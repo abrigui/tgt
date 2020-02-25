@@ -69,7 +69,7 @@
                 <li class="nav-item"><a href="{{ path('affiche_talent') }}" class="nav-link">Talents</a></li>
                 <li class="nav-item"><a href="{{ path('AfficheAgence') }}" class="nav-link">Agences événementielles</a></li>
                 <li class="nav-item"><a href="{{ path('AfficherEvenementFront') }}" class="nav-link">Evénement</a></li>
-                <li class="nav-item"><a href="{{ path('Display_article_front') }}" class="nav-link">Blog</a></li>
+                <li class="nav-item"><a href="{{ path('Display_article_front', { 'theme':'all'}) }}" class="nav-link">Blog</a></li>
             </ul>
         </div>
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}

@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3a47e99d-2f3b-41ce-9d43-8c3289b7b61c" name="Default Changelist" comment="" />
+    <list default="true" id="3a47e99d-2f3b-41ce-9d43-8c3289b7b61c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/layoutFront.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/layoutFront.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Article.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Article.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ArticleBundle/Controller/ArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ArticleBundle/Controller/ArticleController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ArticleBundle/Resources/config/routing.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/ArticleBundle/Resources/config/routing.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ArticleBundle/Resources/views/Article/Display_article_front.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ArticleBundle/Resources/views/Article/Display_article_front.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ArticleBundle/Resources/views/Article/add_article.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/ArticleBundle/Resources/views/Article/add_article.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GestionPublicationBundle/Resources/views/accueil.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/GestionPublicationBundle/Resources/views/accueil.html.twig" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +37,9 @@
     </option>
     <expand />
     <select />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -87,6 +100,9 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1Y1Nuzvii1JZaHB7gHNa3nxXKR3" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -94,23 +110,24 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Scrumify" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/ArticleBundle" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
     <property name="settings.editor.selected.configurable" value="Symfony2.SettingsForm" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\TGT\src\ArticleBundle" />
+      <recent name="C:\xampp\htdocs\TGT\src\ArticleBundle\Resources\views\Article" />
+      <recent name="C:\xampp\htdocs\TGT\src\AppBundle\Form" />
+      <recent name="C:\xampp\htdocs\TGT\src\AppBundle\Entity" />
+      <recent name="C:\xampp\htdocs\TGT\web\back" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\TGT\app\Resources\views" />
       <recent name="C:\xampp\htdocs\TGT\src\AppBundle\Entity" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\TGT\web\back" />
-      <recent name="C:\xampp\htdocs\TGT\app\Resources\views\default" />
-      <recent name="C:\xampp\htdocs\TGT\src\ArticleBundle\Resources" />
-      <recent name="C:\xampp\htdocs\TGT\src\ArticleBundle" />
-      <recent name="C:\xampp\htdocs\TGT\src\ArticleBundle\Controller" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -133,9 +150,9 @@
       <command value="composer require knplabs/knp-paginator-bundle " />
       <command value="s doctrine:generate:entity " />
       <command value="s generate:controller " />
-      <command value="s doctrine:schema:update --force" />
       <command value="s doctrine:database:create" />
       <command value="s doctrine:schema:create" />
+      <command value="s doctrine:schema:update --force" />
     </option>
   </component>
   <component name="RunDashboard">
@@ -179,12 +196,23 @@
       <workItem from="1582581079857" duration="3330000" />
       <workItem from="1582618079892" duration="14583000" />
       <workItem from="1582640456931" duration="14347000" />
-      <workItem from="1582658332757" duration="3941000" />
+      <workItem from="1582658332757" duration="9077000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="WindowStateProjectService">
     <state x="485" y="84" key="#com.intellij.ide.util.MemberChooser" timestamp="1582655377134">

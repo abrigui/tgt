@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\File\File;
  * Article
  *
  * @ORM\Table(name="article", indexes={@ORM\Index(name="IDX_23A0E66D725330D", columns={"agence_id"}), @ORM\Index(name="IDX_23A0E6659027487", columns={"theme_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="ArticleBundle\Repository\ArticleRepository")
  * @Vich\Uploadable
  */
 class Article
@@ -50,7 +50,7 @@ class Article
      *
      * @ORM\ManyToOne(targetEntity="Theme")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="theme_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="theme_id", referencedColumnName="id", onDelete="CASCADE")
      * })
      */
     private $theme;
@@ -60,7 +60,7 @@ class Article
      *
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
      * })
      */
     private $user;
@@ -71,7 +71,7 @@ class Article
      *
      * @ORM\ManyToOne(targetEntity="Agence")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="agence_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="agence_id", referencedColumnName="id", onDelete="CASCADE")
      * })
      */
     private $agence;

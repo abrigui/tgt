@@ -23,7 +23,7 @@
         {% for a in art |slice(0, 3)%}
             <div class="col-4 text-cente ">
                 <div class="blog-entry">
-                    <a href="#" class="block-20 d-flex align-items-end" style="background-image: url(http://localhost/tgt/web/uploads/article/photo/{{ a.image }});">
+                    <a href="#" class="block-20 d-flex align-items-end" style="background-image: url(../uploads/article/photo/{{ a.image }});">
                         <div class="meta-date text-center p-2">
                             <span class="day">{{ a.date |date('d') }}</span>
                             <span class="mos">{{ a.date |date('F') }}.</span>
