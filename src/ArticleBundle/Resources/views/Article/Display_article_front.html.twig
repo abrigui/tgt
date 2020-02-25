@@ -9,22 +9,44 @@
         <div class="container container-fluid">
             <div class="row justify-content-center mb-5 pb-2">
                 <div class="col-md-8 text-center heading-section ">
-{#                    <span class="subheading">Blog Posts</span>#}
+                    {#                    <span class="subheading">Blog Posts</span>#}
                     <h2 class="mb-4">Articles</h2>
+
                     {% if app.user %}
-                    {% if app.user.hasRole('ROLE_USERP') %}
-                    <a href="{{ path('add_article') }}" class="btn btn-secondary">
-                        <i class="fa fa-undo" aria-hidden="true"></i> Ajouter Article</a>
+                        {% if app.user.hasRole('ROLE_USERP') %}
+                            <a href="{{ path('add_article') }}" class="btn btn-secondary">
+                                <i class="fa fa-undo" aria-hidden="true"></i> Ajouter Article</a>
+                        {% endif %}
                     {% endif %}
-                    {% endif %}
-{#                    <p>Separated they live in. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country</p>#}
+                    <div class="tabulation-2 mt-4">
+                        <ul class="nav nav-pills nav-fill d-md-flex d-block">
+
+                            <li class="nav-item">
+                                <a class="nav-link {%  if(selectedTheme == "all") %} active {% endif %} py-2"  href="{{ path('Display_article_front', { 'theme':"all"}) }}"> All</a>
+                            </li>
+                            {% for t in Themes %}
+                                <li class="nav-item px-lg-2">
+                                    <a class="nav-link {%  if(selectedTheme == t.libelle) %} active {% endif %} py-2"  href="{{ path('Display_article_front', { 'theme':t.libelle}) }}"> {{ t.libelle }}</a>
+                                </li>
+                            {% endfor %}
+
+                        </ul>
+
+                    </div>
+
+
+
+
+
+
+                    {#                    <p>Separated they live in. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country</p>#}
                 </div>
             </div>
             <div class="row">
                 {% for a in Articles %}
                 <div class="col-md-6 col-lg-4 ">
                     <div class="blog-entry">
-                        <a href="#" class="block-20 d-flex align-items-end" style="background-image: url(http://localhost/tgt/web/uploads/article/photo/{{ a.image }});">
+                        <a href="{{ path('Display_article_solo', { 'id': a.id }) }}" class="block-20 d-flex align-items-end" style="background-image: url(../../uploads/article/photo/{{ a.image }});">
                             <div class="meta-date text-center p-2">
                                 <span class="day">{{ a.date |date('d') }}</span>
                                 <span class="mos">{{ a.date |date('F') }}.</span>
@@ -35,7 +57,7 @@
                             <h3 class="heading"><a href="#">{{a.titre}}</a></h3>
                             <p>{{ a.description }}</p>
                             <div class="d-flex align-items-center mt-4">
-                                <p class="mb-0"><a href="#" class="btn btn-primary">Read More </a>{% if app.user %} {% if app.user.id == a.user.id %}<a href="{{ path('delete_article', { 'id': a.id }) }}" class="btn btn-primary">Delete </a>{% endif %} {% endif %}</p>
+                                <p class="mb-0"><a href="{{ path('Display_article_solo', { 'id': a.id }) }}" class="btn btn-primary">Read More </a>{% if app.user %} {% if app.user.id == a.user.id %}<a href="{{ path('delete_article', { 'id': a.id }) }}" class="btn btn-primary">Delete </a>{% endif %} {% endif %}</p>
                                 <p class="ml-auto mb-0">
                                     <a href="#" class="mr-2">Admin</a>
 {#                                    <a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>#}

@@ -35,7 +35,7 @@ Display_article_front:
     path: /DisplayArticleFront/{theme}
     defaults: { _controller: ArticleBundle:Article:displayArticleFront }
 Display_article_solo:
-    path: /DisplayArticleFrontSolo/{id}
+    path: /DisplayArticleFront/{id}
     defaults: { _controller: ArticleBundle:Article:displayArticleSolo }
 rate:
     path:     /rate/{id}/{type}
